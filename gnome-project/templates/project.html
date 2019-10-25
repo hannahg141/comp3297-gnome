@@ -1,7 +1,41 @@
-<h1>Showing a single projects by</h1>
-
-<!--{{project.name}}-->
-<!--<ul>-->
-<!--{% for project in project_list %}-->
-    <!--<li>[{{ project.status }}] </li>-->
-<!--</ul></html>-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Project Details</title>
+        <h1>Project Details</h1>
+    </head>
+    <body>
+        <p>Completed Sprints</p>
+        <!-- Completed sprints code-->
+            <ul> { % for sprint in sprint_list if completed% }
+                <li>{{ sprint.name }} Backlog</li>
+                <ul> { % for pbi in sprint % }
+                    <li> {{ pbi.name }} </li>
+                    <ul> { % for task in pbi % }
+                        <li> {{ task.name }}
+                            <!--<form action="projects/create-new-project">-->
+                                <button type="submit">View Task</button>
+                            </form>
+                        </li>
+                         { % endfor % }
+                    </ul>
+                     { % endfor % }
+                </ul>
+                 { % endfor % }
+            </ul>
+        <p>Current Sprint Backlog</p>
+        <!-- Sprint backlog code-->
+            <ul> { % for sprint in sprint_list if current% }
+                <li>{{ sprint.name }} Backlog</li>
+                <ul> { % for pbi in sprint % }
+                    <li> {{ pbi.name }} </li>
+                    <ul> { % for task in pbi % }
+                        <li> {{ task.name }} </li>
+                         { % endfor % }
+                    </ul>
+                     { % endfor % }
+                </ul>
+                 { % endfor % }
+            </ul>
+    </body>
+</html>

@@ -32,6 +32,7 @@ class ProductBacklog(models.Model):
 
 
 class SprintBacklog(ProductBacklog):
+    status = models.CharField(max_length=200, default='current')
 
     def __str__(self):
         return self.name
@@ -47,9 +48,19 @@ class ProductBacklogItem(models.Model):
         return self.name
 
 
+class SprintBacklogItem(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
+    pointEstimate = models.IntegerField()
+    sprintBacklog = models.ForeignKey(SprintBacklog, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
 class Task(models.Model):
     name = models.CharField(max_length=200)
-    sprintBacklog = models.ForeignKey(SprintBacklog, on_delete=models.CASCADE)
+    #sprintBacklog = models.ForeignKey(SprintBacklog, on_delete=models.CASCADE)
     description = models.CharField(max_length=500)
     estimatedEffortHours = models.TimeField()
     actualEffortHours = models.TimeField()
